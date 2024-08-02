@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 
 import { ChatMessageComponent, MyMessageComponent, TextMessageBoxComponent, TextMessageBoxEvent, TextMessageBoxFileComponent, TextMessageBoxSelectComponent, TextMessageEvent, TypingLoaderComponent } from '@components/index';
+import { OpenAiService } from 'app/presentation/services/openai.service';
 
 
 
@@ -48,6 +49,8 @@ export default class OrthographyPageComponent {
 
   public messages = signal([{text:'hola mundo', isGtp:false}]);
   public isLoading = signal(false);
+
+  public openAiService = inject(OpenAiService);
 
   handleMessageWithFile({prompt,file}: TextMessageEvent) {
     console.log({prompt,file});
